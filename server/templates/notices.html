@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<title>Notices</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='/style.css')}}">
+
+<head>
+<style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.heading{
+padding: 40px;
+font-size: 45px;
+}
+
+
+ p.one{
+padding:15px;
+font-size: 19px;
+border-style: ridge;
+border-color: #7FFF00;
+}
+ p.two{
+padding:15px;
+font-size: 18px;
+border-style: ridge;
+border-color: #7FFF00;
+}
+
+pic1
+{
+	align:left;
+	position :relative;
+	
+}
+
+.class1{
+font-size:20;
+
+}
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid blue;
+  padding: 10px;
+}
+
+</style>
+</head>
+
+
+<body class="w3-black" style="font-family:Montserrat">
+<div class="animation-wrapper">
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:100%">
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="/register" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>REGISTER</p>
+  </a>
+  <a href="/login" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>LOGIN</p>
+  </a>
+  <a href="/gallery" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>GALLERY</p>
+  </a>
+  <a href="/contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  {% if username %}
+  <a href = '/logout' class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-power-off w3-xxlarge" style="color:#FFFFFF"></i>
+    <p>LOGOUT</p>
+  </a>
+  {% endif %}
+</nav>
+<div class="particle particle-1"></div>
+{% if username %}
+<div class="w3-sidebar w3-bar-block" style="width:15%;right:0">
+  <h5 class="w3-bar-item">Menu</h5>
+  <a href="/leaverequest" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>Request Leave</p>
+  </a>
+  <a href="/leavestatus" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file-text-o w3-xxlarge"></i>
+    <p>View Leave Status</p>
+  </a>
+   <a href="{{url_for('static',filename='notes.html')}}" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file w3-xxlarge"></i>
+    <p>Sticky Notes tool BETA</p>
+  </a>
+  <a href="/notices" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-trello w3-xxlarge"></i>
+    <p>Notices</p>
+  </a>
+  <a href="/policy" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-handshake-o w3-xxlarge"></i>
+    <p>Company Policies</p>
+  </a>
+  <a href="/about" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users w3-xxlarge"></i>
+    <p>About Us</p>
+  </a>
+   <a href="/password" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-lock w3-xxlarge"></i>
+    <p>Change password</p>
+  </a>
+</div>
+{% endif %}
+
+	<ul style="margin-left:130px">
+	  
+	  <li><a class="w3-bar-item w3-button w3-padding-large w3-black" href="/notices"><i class="fa fa-trello w3-xxlarge"></i><p>Announcements</p></a></li>
+    
+
+    <li><a class="w3-bar-item w3-button w3-padding-large w3-black" href="/holiday"><i class="fa fa-plane w3-xxlarge"></i><p>Holidays</p></a></li>
+    
+
+    <li><a class="w3-bar-item w3-button w3-padding-large w3-black" href="/birthday"><i class="fa fa-birthday-cake w3-xxlarge"></i><p>Birthdays</p></a></li>
+	  
+	</ul>
+
+  <div class="particle particle-3"></div>
+
+<br> 
+<br>
+<br>
+<div id="div3" class="center" style="background-color:#add8e6">
+ {% block content %}
+ <marquee scrolldelay="100">
+   {% for employee in employee_login %}
+   <strong style="color:#000000"> {{employee.fname}} {{employee.lname}} </strong>
+   <strong style="color:#000000"> has joined Emp-Linked as a </strong><strong style="font-style: italic;color:#000000"> {{employee.jobrole}}.</strong>
+  {% endfor %}
+ </marquee>
+  {% endblock %}
+</div>
+<br>
+<div id="div1" class="center" style="background-color:#add8e6"><marquee direction="left" scrolldelay="120"><strong style="color:#000000">Big Husky projects are due tomorrow!</strong></marquee></div> <br>
+<div id="div2" class="center" style="background-color:#add8e6"><marquee scrolldelay="130"><strong style="color:#000000">Everyone, please be ready with your work in 
+the meeting room at 10 o'clock.</strong></marquee></div> <br>
+<div id="div3" class="center" style="background-color:#add8e6"><strong style="color:#000000">Submit by 9/09/20:</strong><br>
+ <p style="color:#000000">- Project Reports</p><p style="color:#000000"> - Presentations</p></div>
+ <br>
+
+<p style="font-size:25px;text-align:center;border-bottom:1px solid black;
+border-top:1px solid black; padding:7px;">Quote of the day : <br>"Goodness and hard work are rewarded 
+with respect."</p>
+<div class="particle particle-4"></div>
+</div>
+</body>
+</html> 

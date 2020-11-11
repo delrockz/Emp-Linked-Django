@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<title>Admin Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='/style.css')}}">
+<style>
+  input:placeholder-shown {
+   font-style: italic;
+ }
+</style>
+
+<body class="w3-black" style="font-family:Montserrat">
+  <div class="animation-wrapper">
+
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:100%">
+  <a href="/admin" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  
+  {% if username %}
+  <a href = '/logout' class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-power-off w3-xxlarge" style="color:#FFFFFF"></i>
+    <p>LOGOUT</p>
+  </a>
+  {% endif %}
+</nav>
+<div class="particle particle-1"></div>
+{% if username %}
+<div class="w3-sidebar w3-bar-block" style="width:15%;right:0">
+  <h5 class="w3-bar-item">Menu</h5>
+  <a href="/showemp" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users w3-xxlarge"></i>
+    <p>View Employees</p>
+  </a>
+  <a href="/viewleaves" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>View Leave Requests</p>
+  </a>
+  <a href="/viewfeedback" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file-text-o w3-xxlarge"></i>
+    <p>View Feedback</p>
+  </a>
+  <a href="{{url_for('static',filename='notes.html')}}" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file w3-xxlarge"></i>
+    <p>Sticky Notes tool BETA</p>
+  </a>
+</div>
+{% endif %}
+<div class="particle particle-2"></div>
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="/" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="/register" class="w3-bar-item w3-button" style="width:25% !important">REGISTER</a>
+    <a href="/login" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    <a href="/gallery" class="w3-bar-item w3-button" style="width:25% !important">GALLERY</a>
+    <a href="/contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+
+<div class="w3-padding-large" id="main">
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">Emp -</span> Linked.</h1>
+    <p>Employee Management System</p>
+  </header>
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">Welcome,</h2>
+    {% if username %}
+        <p class="username"><strong>You are logged in as</strong> {{ username }}</p>
+      {% else %}
+      	<p>You are not logged in <br><a href = '/login'><b>Click here to log in</b></a></p>
+      {% endif %}
+
+    <hr style="width:200px" class="w3-opacity">
+    <div class="particle particle-3"></div>
+{% block content %}
+{% if showemployees %}
+  <h2 class="w3-text-light-grey">Employees :</h2>
+   {% for employee in employee_login %}
+   <strong>Name :</strong> {{employee.fname}} {{employee.lname}} <br>
+   <strong>Email :</strong> {{employee.email}} <br>
+   <strong>Date of Birth :</strong> {{employee.dob}} <br>
+   <strong>Bio :</strong> {{employee.bio}} <br>
+   <strong>Job Role :</strong> {{employee.jobrole}} <br>
+  <br>
+
+{% endfor %}
+{% endif %}
+<div class="particle particle-3"></div>
+{% if show %}
+
+  <h2 class="w3-text-light-grey">Leave Requests :</h2>
+   {% for leave in leave_request %}
+   <strong>Name :</strong> {{leave.fname}} {{leave.lname}} <br><strong>Department :</strong> {{leave.dept}} <strong>Job Role :</strong> {{leave.pos}} <br>
+   <strong>Leave Date :</strong> {{leave.leavedate}} <strong>Reason :</strong> {{leave.reason}} <br>
+   <strong>Status :</strong> {{leave.status}} <br>
+
+  <br>
+
+{% endfor %}
+<form class="w3-black" action="" method="post">
+      <h2 class="w3-text-light-grey">Approve / Reject leaves:</h2>
+      <label><b>Enter Employee First Name : </b></label>&emsp;
+      <input type="text" id="fname" placeholder="case sensitive" name="fname" value="{{request.form.fname}}"><br><br>
+      <input type="radio" id="Approved" name="status" value="Approved">
+      <label for="approved"> Approved</label> </t>
+      <input type="radio" id="Rejected" name="status" value="Rejected">
+      <label for="rejected">Rejected</label><br><br>
+    <button type="submit" value="updateleavestatus">Update Leave Status</button>
+    {% if error %}
+        <p class="error"><strong>Status:</strong> {{ error }} </p>
+    {% endif %}
+{% endif %}
+{% if showfeedback %}
+<h2 class="w3-text-light-grey">Feedback :</h2>
+   {% for msg in feedback %}
+   <strong>Name : </strong> {{msg.name}} <br> <strong> Email : </strong>  {{msg.email}} <br>
+   <strong> Subject : </strong> {{msg.subject}} <br>
+   <strong> Message : </strong> <br> {{msg.message}} <br>
+
+  <br>
+
+{% endfor %}
+{% endif %}
+{% endblock %}
+<div class="particle particle-4"></div>
+
+
+    </div>
+    <br>
+  
+
+</div>
+
+</body>
+</html>

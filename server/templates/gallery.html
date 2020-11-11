@@ -1,0 +1,286 @@
+ {% load static %}
+<!DOCTYPE html>
+ <html>
+ <title>Company Gallery 2020</title>
+ <head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{%static '/style.css'%}">
+
+ <style>
+ .header {
+  text-align: center;
+  padding: 32px;
+}
+
+ body
+ {
+	margin: 0;
+	padding: 0;
+	font-family: san-serif;
+ }
+ 
+ .container
+ {
+	width: 1000px;
+	min-height: 500px;
+	background: #000000;
+	margin:  0;
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	
+	float:left;
+	margin-right:10px;
+	
+ }
+ 
+ .container .box
+ {
+	position:relative;
+	width: 310px;
+	height: 300px;
+	background: #ff0;
+	margin:10px;
+	box-sizing:border-box;
+	display:inline-block;
+ }
+ 
+ .container .box .imgBox{
+ position:relative;
+  overflow:hidden;
+
+ }
+ 
+ .container .box: .imgBox img{
+ max-width:100%;
+ transform:transform .2s;
+
+ }
+ .container .box:hover .imgBox img{
+ transform:scale(1.2);
+ 
+ }
+ 
+ .container .box .details{
+	 position :absolute;
+	 top:10px;
+	 left:10px;
+	 bottom:10px;
+	 right:10px;
+	 background:rgba(0,0,0,.8);
+	 transform:scaleY(0);
+	 transition:transform .5s;
+ }
+ 
+ .container .box:hover .details{
+	 transform:scaleY(1);
+ }
+ 
+ .container .box .details .content{
+	 position :absolute;
+	 top:50%;
+	 transform:translateY(-50%);
+	 text-align:center;
+	 padding:15px;
+	 color:#fff;
+ 
+ }
+ 
+ .container .box .details .content p{
+  margin:10px 0 0;
+  padding:0;
+  font-size:40px;
+ }
+ 
+ 
+.extra{
+	float:left;
+	color:black;
+	
+} 
+
+
+
+ </style>
+ <style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+.w3-sidebar {width: 120px;background: #222;}
+</style>
+ </head>
+
+ <body class="w3-black" style="font-family:Montserrat">
+ 	<div class="animation-wrapper">
+ 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <img src="{%static 'images/logo.png'%}" style="width:100%">
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="/register" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>REGISTER</p>
+  </a>
+  <a href="/login" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>LOGIN</p>
+  </a>
+  <a href="/gallery" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>GALLERY</p>
+  </a>
+  <a href="/contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  {% if username %}
+  <a href = '/logout' class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-power-off w3-xxlarge" style="color:#FFFFFF"></i>
+    <p>LOGOUT</p>
+  </a>
+  {% endif %}
+</nav>
+
+{% if username %}
+<div class="w3-sidebar w3-bar-block" style="width:15%;right:0">
+  <h5 class="w3-bar-item">Menu</h5>
+  <a href="/leaverequest" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>Request Leave</p>
+  </a>
+  <a href="/leavestatus" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file-text-o w3-xxlarge"></i>
+    <p>View Leave Status</p>
+  </a>
+  <a href="{% static 'notes.html'%}" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file w3-xxlarge"></i>
+    <p>Sticky Notes tool BETA</p>
+  </a>
+  <a href="/notices" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-trello w3-xxlarge"></i>
+    <p>Notices</p>
+  </a>
+  <a href="/policy" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-handshake-o w3-xxlarge"></i>
+    <p>Company Policies</p>
+  </a>
+  <a href="/about" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users w3-xxlarge"></i>
+    <p>About Us</p>
+  </a>
+   <a href="/password" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-lock w3-xxlarge"></i>
+    <p>Change password</p>
+  </a>
+</div>
+{% endif %}
+<div class="particle particle-1"></div>
+
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="/" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="/register" class="w3-bar-item w3-button" style="width:25% !important">REGISTER</a>
+    <a href="/login" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    <a href="/gallery" class="w3-bar-item w3-button" style="width:25% !important">GALLERY</a>
+    <a href="/contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+<div class="particle particle-2"></div>
+ <h1 class="w3-jumbo" style="text-align:center"><span class="w3-hide-small">Company</span> Gallery 2020</h1>
+
+	 <div class="container" style="margin-left:120px">
+	 
+		<div class="box">
+		<div class ="imgBox">
+			<img src="{%static 'images/pic1.jpg'%}" width="310px" height="300px"></div>
+			<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img  src="{%static 'images/pic2.png'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+			
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic3.jpg'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>OFFICE<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic4.png'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+		<div class="particle particle-3"></div>
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic5.jpg'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT MEMBERS<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic6.jpeg'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic6.jpeg'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic2.png'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>PROJECT DISCUSSION<p></div></div>
+			</div>
+		
+		<div class="box">
+		<div class ="imgBox">
+		<img src="{%static 'images/pic3.jpg'%}" width="310px" height="300px"></div>
+		<div class="details"><div class="content"><p>OFFICE<p></div></div>
+			</div>
+	
+		
+		
+		
+	 </div>
+	 <p class="extra" style="color:white"> A good employee is an asset to any organization as the key to <br>the organization’s 
+	success is the effectiveness of the <br>employees working in it.<br><br><br>
+	
+	Efficient employees have a positive attitude and an<br> open mind.<br>
+	 They are emotionally stable and have a consistent <br>and efficient working 
+	 and leadership style.<br><br><br>
+	 
+	 They outperform the negative employees in <br>productivity, energy levels, and 
+	health care costs.<br> Their approach is quite receptive and they are more <br>successful
+	 and effective in handling clients than <br>their negative counterparts.<br><br><br>
+ 
+	Satisfied employees are receptive to feedback<br> about their work as they constantly 
+	look to <br>improve their skills and efficiency.<br> They take healthy criticism in a positive 
+	way <br>and look at it as an opportunity for<br> self-improvement.<br><br><br>
+	
+	They actively participate in their career<br> development programs and also keep up on <br>the
+	 current industry trends. <br>Their efficient work pays off and helps<br> them climb the
+	 organizational ladder.<br> They are concerned about the company’s<br> performance and 
+	 also offer ideas to<br> improve the same..<br><br><br>
+
+	A good employee is an asset to any <br>organization as the key to the<br> organization’s 
+	success is the <br>effectiveness of the employees working in it. <br><br><br>
+
+	The employee performance will speak <br>for itself. Not only is there a good <br>performance
+	 with little supervision<br> but also willing to take up additional<br> responsibilities. 
+	 Such employees do <br>not require supervision and direction <br>to complete tasks. <br><br><br>
+<div class="particle particle-4"></div>
+<br><br><br><br><br><br>
+	</p>
+	 
+ </body>
+ </html>

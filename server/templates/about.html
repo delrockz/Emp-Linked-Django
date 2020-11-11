@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<title>About Emp-Linked</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{url_for('static',filename='/style.css')}}">
+<head>
+<style>
+.div1 img{
+width:1340px;
+height:300px;
+}
+.div2 h1{
+border-bottom:1px solid black;
+}
+.div2{
+position:absolute;
+margin:0 240px;
+}
+
+#para1{
+font-size:21px;
+color:seagreen;
+}
+#para2{
+line-height:22px;
+font-size:17px;
+}
+.center{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	width:50%;
+}
+
+</style>
+</head>
+<body class="w3-black" style="font-family:Montserrat">
+<div class="animation-wrapper">
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <img src="{{ url_for('static', filename='images/logo.png') }}" style="width:100%">
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="/register" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>REGISTER</p>
+  </a>
+  <a href="/login" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>LOGIN</p>
+  </a>
+  <a href="/gallery" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-camera w3-xxlarge"></i>
+    <p>GALLERY</p>
+  </a>
+  <a href="/contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+  {% if username %}
+  <a href = '/logout' class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-power-off w3-xxlarge" style="color:#FFFFFF"></i>
+    <p>LOGOUT</p>
+  </a>
+  {% endif %}
+</nav>
+<div class="particle particle-1"></div>
+{% if username %}
+<div class="w3-sidebar w3-bar-block" style="width:15%;right:0">
+  <h5 class="w3-bar-item">Menu</h5>
+  <a href="/leaverequest" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>Request Leave</p>
+  </a>
+  <a href="/leavestatus" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file-text-o w3-xxlarge"></i>
+    <p>View Leave Status</p>
+  </a>
+   <a href="{{url_for('static',filename='notes.html')}}" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-file w3-xxlarge"></i>
+    <p>Sticky Notes tool BETA</p>
+  </a>
+  <a href="/notices" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-trello w3-xxlarge"></i>
+    <p>Notices</p>
+  </a>
+  <a href="/policy" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-handshake-o w3-xxlarge"></i>
+    <p>Company Policies</p>
+  </a>
+  <a href="/about" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-users w3-xxlarge"></i>
+    <p>About Us</p>
+  </a>
+   <a href="/password" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-lock w3-xxlarge"></i>
+    <p>Change password</p>
+  </a>
+</div>
+{% endif %}
+<div class="particle particle-2"></div>
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="/" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="/register" class="w3-bar-item w3-button" style="width:25% !important">REGISTER</a>
+    <a href="/login" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    <a href="/gallery" class="w3-bar-item w3-button" style="width:25% !important">GALLERY</a>
+    <a href="/contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div><div class="div1"><img src="{{url_for('static',filename='images/about2.jpg')}}" class="center" style="width:75%"></div>
+<div class="particle particle-3"></div>
+<div class="div2" ><h1>About us</h1>
+<p id="para1" >WELCOME TO EMP-LINKED</p>
+<p id="para2" style="width:80%">Welcome to the official website of EMP-LINKED Company. EMP-LINKED is a 
+dynamic IT products development company based in Panaji, Goa.</p>
+<p id="para2" style="width:80%"> The company 
+was established as a startup in 2005 and since then it has been providing 
+offshore software development and related services to the parent
+ company and its associates.
+The company has developed a number of high profile products in the finance 
+and education domains that are currently being used 
+in Europe and other continents. </p>
+<p id="para2" style="width:80%"> We believe that the judicious use of technology, together with a good
+ design can reduce complexity, connect individuals, and provide valuable
+ insights, all of which ultimately help businesses succeed.</p>
+ <br>
+ <br>
+ 
+</div >
+<div class="particle particle-4"></div>
+
+ <br>
+ <br>
+</body>
+</html>
